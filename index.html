@@ -1,120 +1,207 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <title>Brutal Assault 2026 – Basit Planlayıcı</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:1rem;background:#111;color:#eee}
-    h1{color:#ff4d4d}
-    label{display:block;margin:.6rem 0 .2rem}
-    input,select{width:100%;padding:.4rem;border:none;border-radius:4px}
-    button{background:#ff4d4d;color:#fff;border:none;padding:.6rem 1rem;border-radius:4px;cursor:pointer;margin-top:1rem}
-    button:hover{background:#ff1a1a}
-    #sonuc{background:#222;padding:1rem;border-radius:6px;margin-top:1rem;white-space:pre-wrap}
-  </style>
-</head>
-<body>
-  <h1>Brutal Assault 2026 Planlayıcı</h1>
-
-  <label>Gitmeden önce kaç gün kalacaksın?</label>
-  <input type="number" id="extraGun" min="0" max="5" value="2">
-
-  <label>Konaklama tipi</label>
-  <select id="konak">
-    <option value="otel">Otel</option>
-    <option value="airbnb">Airbnb</option>
-    <option value="kamp">Festival kampı</option>
-  </select>
-
-  <label>Ulaşım</label>
-  <select id="ulasim">
-    <option value="araba">Kendi aracım</option>
-    <option value="tren">Tren + otobüs</option>
-    <option value="ucak">Uçak + toplu taşıma</option>
-  </select>
-
-  <label>Bütçe aralığı</label>
-  <select id="butce">
-    <option value="dusuk">Düşük (&lt; 600 €)</option>
-    <option value="orta">Orta (600-1000 €)</option>
-    <option value="yuksek">Yüksek (&gt; 1000 €)</option>
-  </select>
-
-  <button onclick="planla()">Planı Oluştur</button>
-
-  <div id="sonuc"></div>
-
-  <script>
-    function planla(){
-      const ex   = Number(document.getElementById('extraGun').value);
-      const kon  = document.getElementById('konak').value;
-      const ul   = document.getElementById('ulasim').value;
-      const but  = document.getElementById('butce').value;
-
-      let cikti = "=== Brutal Assault 2026 Özet Plan ===\n\n";
-      cikti += `Festival öncesi ekstra gün: ${ex}\n`;
-      cikti += `Konaklama: ${kon}\n`;
-      cikti += `Ulaşım: ${ul}\n`;
-      cikti += `Bütçe: ${but}\n\n`;
-
-      // basit kurallar
-      const fiyatlar = {
-        dusuk: {otel:40,airbnb:35,kamp:0, araba:60, tren:40, ucak:150},
-        orta: {otel:70,airbnb:60,kamp:0, araba:80, tren:60, ucak:220},
-        yuksek: {otel:120,airbnb:100,kamp:0, araba:120, tren:100, ucak:350}
-      };
-      const konfiyat = fiyatlar[but][kon];
-      const ulfiyat  = fiyatlar[but][ul];
-      const gunlukYemek = {dusuk:20, orta:35, yuksek:60}[but];
-
-      const toplam = (ex+5)*(konfiyat + gunlukYemek) + ulfiyat + 120; // 120 € festival bileti
-
-      cikti += `Tahmini toplam: ≈ ${Math.round(toplam)} €\n\n`;
-
-      // rota önerisi
-      cikti += "--- Önerilen rota ---\n";
-      if(ex>0){
-        cikti += `1-${ex} Ağu: Prag keşfi (araba yoksa tren+tramvay)\n`;
-      }
-      cikti += `${ex+1} Ağu: Prag → Jaroměř, öğleden sonra kale turu\n`;
-      cikti += `${ex+2} Ağu: Adršpach kayaları doğa günü\n`;
-      cikti += `${ex+3} Ağu: Kutná Hora kemik kilisesi\n`;
-      cikti += `${ex+4} Ağu: Festival 1. gün\n`;
-      cikti += `${ex+5} Ağu: Festival 2. gün\n`;
-      cikti += `${ex+6} Ağu: Festival 3. gün + gece konserleri\n`;
-      cikti += `${ex+7} Ağu: Check-out & dönüş\n`;
-
-      document.getElementById('sonuc').textContent = cikti;
-    }
-  </script>
-</body>
-
-</html>
-
-<!doctype html><html lang="tr"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Brutal 26</title>
-<meta name="theme-color" content="#ff4d4d">
-<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Brutal 26&quot;,&quot;short_name&quot;:&quot;Brutal26&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#111&quot;,&quot;theme_color&quot;:&quot;#ff4d4d&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'&gt;&lt;rect width='128' height='128' fill='%23ff4d4d' rx='16'/&gt;&lt;text x='50%' y='50%' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle'&gt;BA&lt;/text&gt;&lt;/svg&gt;&quot;,&quot;sizes&quot;:&quot;128x128&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
-<style>body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:1rem;background:#111;color:#eee}h1{color:#ff4d4d}label{display:block;margin:.6rem 0 .2rem}input,select{width:100%;padding:.4rem;border:none;border-radius:4px}button{background:#ff4d4d;color:#fff;border:none;padding:.6rem 1rem;border-radius:4px;cursor:pointer;margin-top:1rem}button:hover{background:#ff1a1a}#sonuc{background:#222;padding:1rem;border-radius:6px;margin-top:1rem;white-space:pre-wrap}</style>
+<title>Ultra Brutal 2026</title>
+<meta name="theme-color" content="#ff2a6d">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+  :root{
+    --bg:#0f0f0f;--card:#1c1c1c;--accent:#ff2a6d;--text:#f1f1f1;--sub:#888;
+    --bar:#ff2a6d;--shadow:0 8px 32px rgba(255,42,109,.25);
+  }
+  body.light{
+    --bg:#f5f5f5;--card:#ffffff;--text:#111;--sub:#555;
+    --shadow:0 8px 32px rgba(0,0,0,.08);
+  }
+  body{
+    margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+    transition:background .3s;
+  }
+  h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-align:center;letter-spacing:-2px;}
+  .toggle{
+    position:absolute;top:1rem;right:1rem;background:var(--card);border:0;
+    border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;
+    box-shadow:var(--shadow);color:var(--text);
+  }
+  .container{padding:2rem 1rem;max-width:900px;margin:auto;}
+  .controls{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:2rem 0;
+  }
+  label{font-size:.9rem;font-weight:600;margin-bottom:.3rem;display:block;color:var(--sub);}
+  select,button{
+    width:100%;padding:.75rem;border:0;border-radius:8px;font-size:1rem;
+    background:var(--card);color:var(--text);box-shadow:0 4px 12px rgba(0,0,0,.2);
+  }
+  button{background:var(--accent);color:#fff;font-weight:700;cursor:pointer;transition:.3s;}
+  button:hover{filter:brightness(1.1);}
+  .hotels{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin:2rem 0;
+  }
+  .hotel-card{
+    background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);
+    transition:transform .3s;cursor:pointer;
+  }
+  .hotel-card:hover{transform:translateY(-6px) rotate(1deg);}
+  .hotel-img{
+    height:140px;background-size:cover;background-position:center;
+  }
+  .deminka{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140"><rect fill="%23c0392b" width="400" height="140"/><text x="50%" y="50%" font-size="60" fill="white" text-anchor="middle" dominant-baseline="middle">DEMINKA</text></svg>');}
+  .awam{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140"><rect fill="%232c3e50" width="400" height="140"/><text x="50%" y="50%" font-size="60" fill="white" text-anchor="middle" dominant-baseline="middle">AWAM</text></svg>');}
+  .hotel-info{padding:1rem;}
+  .hotel-name{font-size:1.2rem;font-weight:700;margin-bottom:.3rem;}
+  .hotel-desc{font-size:.85rem;color:var(--sub);}
+  .timeline{
+    display:flex;gap:1rem;overflow-x:auto;padding:1rem 0;scroll-snap-type:x mandatory;
+  }
+  .day-slot{
+    min-width:260px;background:var(--card);border-radius:12px;box-shadow:var(--shadow);
+    scroll-snap-align:start;padding:1rem;
+  }
+  .day-title{font-size:1.1rem;font-weight:600;margin-bottom:.5rem;color:var(--accent);}
+  .event-item{font-size:.85rem;margin-bottom:.4rem;}
+  .budget-bar{
+    height:10px;background:var(--card);border-radius:5px;margin:.5rem 0;overflow:hidden;
+  }
+  .budget-fill{
+    height:100%;background:var(--bar);width:0%;transition:width .6s ease;
+  }
+  .total{font-size:1.5rem;font-weight:700;text-align:center;margin-top:1rem;}
+  .print-btn{
+    display:block;width:200px;margin:2rem auto;background:var(--accent);color:#fff;
+    text-align:center;padding:.75rem;border-radius:8px;text-decoration:none;font-weight:600;
+    box-shadow:var(--shadow);
+  }
+  @media print{
+    body{background:#fff;color:#000}
+    .no-print{display:none}
+  }
+</style>
 </head>
 <body>
-<h1>Brutal 26</h1>
-<label>Ekstra gün (Prag vs)</label><input type="number" id="ex" min="0" max="5" value="2">
-<label>Konaklama</label><select id="kon"><option value="otel">Otel</option><option value="airbnb">Airbnb</option><option value="kamp">Kamp</option></select>
-<label>Ulaşım</label><select id="ul"><option value="araba">Araba</option><option value="tren">Tren</option><option value="ucak">Uçak</option></select>
-<label>Bütçe</label><select id="but"><option value="dusuk">Düşük</option><option value="orta">Orta</option><option value="yuksek">Yüksek</option></select>
-<button onclick="plan()">Planla</button>
-<div id="sonuc"></div>
+<button class="toggle no-print" onclick="document.body.classList.toggle('light')" title="Tema">🌓</button>
+
+<div class="container">
+  <h1>Brutal Assault 2026</h1>
+  <p style="text-align:center;color:var(--sub);">Çekya • 3-9 Ağustos • Interaktif Planlayıcı</p>
+
+  <div class="controls no-print">
+    <div>
+      <label>Ekstra gün (Prag vs)</label>
+      <input type="range" id="extraG" min="0" max="5" value="2" oninput="plan()">
+      <span id="extraV">2</span>
+    </div>
+    <div>
+      <label>Konaklama</label>
+      <select id="kon" onchange="plan()">
+        <option value="otel">Otel</option>
+        <option value="airbnb">Airbnb</option>
+        <option value="kamp">Kamp</option>
+      </select>
+    </div>
+    <div>
+      <label>Ulaşım</label>
+      <select id="ul" onchange="plan()">
+        <option value="araba">Kendi Arabam</option>
+        <option value="tren">Tren + Otobüs</option>
+        <option value="ucak">Uçak + Toplu</option>
+      </select>
+    </div>
+    <div>
+      <label>Bütçe</label>
+      <select id="but" onchange="plan()">
+        <option value="dusuk">Düşük</option>
+        <option value="orta" selected>Orta</option>
+        <option value="yuksek">Yüksek</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Otel Kartları -->
+  <div class="hotels no-print">
+    <div class="hotel-card" onclick="window.open('https://www.booking.com/hotel/cz/deminka-palace.html')">
+      <div class="hotel-img deminka"></div>
+      <div class="hotel-info">
+        <div class="hotel-name">Deminka Palace ****</div>
+        <div class="hotel-desc">3-4 Ağu 2026 • Prag • Check-in 15:00</div>
+      </div>
+    </div>
+    <div class="hotel-card" onclick="window.open('https://www.booking.com/hotel/cz/awam.html')">
+      <div class="hotel-img awam"></div>
+      <div class="hotel-info">
+        <div class="hotel-name">Hotel Awam</div>
+        <div class="hotel-desc">4-9 Ağu 2026 • Jaroměř • 250 m kaleye</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline no-print" id="timeline"></div>
+
+  <!-- Bütçe Barları -->
+  <div class="no-print">
+    <h3 style="margin-top:2rem;">Canlı Bütçe</h3>
+    <div class="budget-card">
+      <div class="budget-item"><span>Uçak</span><span id="ucretUcak">€220</span></div>
+      <div class="budget-bar"><div class="budget-fill" id="barUcak"></div></div>
+      <div class="budget-item"><span>Araç</span><span id="ucretArac">€80</span></div>
+      <div class="budget-bar"><div class="budget-fill" id="barArac"></div></div>
+      <div class="budget-item"><span>Konaklama</span><span id="ucretKon">€300</span></div>
+      <div class="budget-bar"><div class="budget-fill" id="barKon"></div></div>
+      <div class="budget-item"><span>Yemek + Aktivite</span><span id="ucretYemek">€175</span></div>
+      <div class="budget-bar"><div class="budget-fill" id="barYemek"></div></div>
+      <div class="budget-item"><span>Festival Bileti</span><span>€134</span></div>
+      <div class="total" id="total">≈ €909</div>
+    </div>
+  </div>
+
+  <a href="javascript:window.print()" class="print-btn no-print">🖨 PDF / Yazdır</a>
+</div>
+
 <script>
+const fiyat={
+  dusuk:{otel:35,airbnb:30,kamp:0,araba:60,tren:40,ucak:150,yemek:20},
+  orta:{otel:70,airbnb:60,kamp:0,araba:80,tren:60,ucak:220,yemek:35},
+  yuksek:{otel:120,airbnb:100,kamp:0,araba:120,tren:100,ucak:350,yemek:60}
+};
+const gunler=[
+  {baslik:"3 Ağu – Varış & Prag",ikon:"✈️",olay:["11:10 İstanbul → PRG","12:00 Araç teslim","15:00 Deminka Palace check-in","18:30 Charles Bridge gün batımı"]},
+  {baslik:"4 Ağu – Prag → Jaroměř",ikon:"🚗",olay:["08:00 Check-out","08:15 Prag Kalesi","12:30 Öğle","14:30 Hotel Awam","17:00 Festival warm-up"]},
+  {baslik:"5 Ağu – Adršpašské Skály",ikon:"🏔️",olay:["08:45 D11 yola çık","09:45 Doğa parkuru","13:45 Oběd","15:30 Dönüş","17:00 Festival 1. gün"]},
+  {baslik:"6 Ağu – Kutná Hora",ikon:"💀",olay:["09:00 Kemik kilisesi","12:15 Dačický rest.","15:00 Dönüş","17:00 Festival 2. gün"]},
+  {baslik:"7 Ağu – Kale & Kano",ikon:"🏰",olay:["09:00 Yeraltı tünel","11:30 Labe kano","15:00 Festival 3. gün","00:30 Meshuggah"]},
+  {baslik:"8 Ağu – Hradec Králové",ikon:"🏙️",olay:["09:45 Bílá věž","11:45 Modern galeri","14:30 Dönüş","17:00 Festival 4. gün","00:15 Slayer"]},
+  {baslik:"9 Ağu – Dönüş",ikon:"🏁",olay:["06:30 Check-out","07:55 Araç teslim PRG","10:40 Uçuş"]}
+];
+
 function plan(){
-  const ex=Number(ex.value),kon=kon.value,ul=ul.value,but=but.value,
-        f={dusuk:{otel:40,airbnb:35,kamp:0,araba:60,tren:40,ucak:150},orta:{otel:70,airbnb:60,kamp:0,araba:80,tren:60,ucak:220},yuksek:{otel:120,airbnb:100,kamp:0,araba:120,tren:100,ucak:350}},
-        y={dusuk:20,orta:35,yuksek:60},
-        top=(ex+5)*(f[but][kon]+y[but])+f[but][ul]+120;
-  sonuc.textContent=`≈ ${Math.round(top)} €\n\n${ex} gün Prag → 5 gün Jaroměř\nKonaklama: ${kon}\nUlaşım: ${ul}\nBütçe: ${but}`;
+  const ex=+extraG.value, but=but.value, kon=kon.value, ul=ul.value,
+        u=fiyat[but], exG=ex+5,
+        ucakC = (ul==='ucak'?u.ucak:0),
+        aracC = (ul==='araba'?u.araba:0),
+        konC  = exG*u[kon],
+        ymkC  = exG*u.yemek,
+        festC = 134,
+        total = ucakC + aracC + konC + ymkC + festC;
+
+  // bar animasyonu
+  function anim(bar,val,max){ bar.style.width='0%'; setTimeout(()=>bar.style.width=(val/max*100)+'%',100); }
+  const maxB=1000;
+  anim(barUcak, ucakC, maxB); anim(barArac, aracC, maxB); anim(barKon, konC, maxB); anim(barYemek, ymkC, maxB);
+  ucretUcak.textContent='€'+ucakC; ucretArac.textContent='€'+aracC; ucretKon.textContent='€'+konC; ucretYemek.textContent='€'+ymkC;
+  total.textContent='≈ €'+Math.round(total);
+
+  // zaman çizelgesi
+  let html='';
+  for(let i=0;i<7;i++){
+    const g=gunler[i], gun=i+1;
+    html+=`<div class="day-slot"><div class="day-title">${g.ikon} ${g.baslik}</div>`+
+          g.olay.map(o=>`<div class="event-item">• ${o}</div>`).join('')+`</div>`;
+  }
+  timeline.innerHTML=html;
+  extraV.textContent=ex;
 }
+plan(); // ilk çalıştır
 </script>
 </body></html>
