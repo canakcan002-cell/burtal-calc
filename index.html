@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Brutal Assault 2026 – Basit Planlayıcı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:1rem;background:#111;color:#eee}
+    h1{color:#ff4d4d}
+    label{display:block;margin:.6rem 0 .2rem}
+    input,select{width:100%;padding:.4rem;border:none;border-radius:4px}
+    button{background:#ff4d4d;color:#fff;border:none;padding:.6rem 1rem;border-radius:4px;cursor:pointer;margin-top:1rem}
+    button:hover{background:#ff1a1a}
+    #sonuc{background:#222;padding:1rem;border-radius:6px;margin-top:1rem;white-space:pre-wrap}
+  </style>
+</head>
+<body>
+  <h1>Brutal Assault 2026 Planlayıcı</h1>
+
+  <label>Gitmeden önce kaç gün kalacaksın?</label>
+  <input type="number" id="extraGun" min="0" max="5" value="2">
+
+  <label>Konaklama tipi</label>
+  <select id="konak">
+    <option value="otel">Otel</option>
+    <option value="airbnb">Airbnb</option>
+    <option value="kamp">Festival kampı</option>
+  </select>
+
+  <label>Ulaşım</label>
+  <select id="ulasim">
+    <option value="araba">Kendi aracım</option>
+    <option value="tren">Tren + otobüs</option>
+    <option value="ucak">Uçak + toplu taşıma</option>
+  </select>
+
+  <label>Bütçe aralığı</label>
+  <select id="butce">
+    <option value="dusuk">Düşük (&lt; 600 €)</option>
+    <option value="orta">Orta (600-1000 €)</option>
+    <option value="yuksek">Yüksek (&gt; 1000 €)</option>
+  </select>
+
+  <button onclick="planla()">Planı Oluştur</button>
+
+  <div id="sonuc"></div>
+
+  <script>
+    function planla(){
+      const ex   = Number(document.getElementById('extraGun').value);
+      const kon  = document.getElementById('konak').value;
+      const ul   = document.getElementById('ulasim').value;
+      const but  = document.getElementById('butce').value;
+
+      let cikti = "=== Brutal Assault 2026 Özet Plan ===\n\n";
+      cikti += `Festival öncesi ekstra gün: ${ex}\n`;
+      cikti += `Konaklama: ${kon}\n`;
+      cikti += `Ulaşım: ${ul}\n`;
+      cikti += `Bütçe: ${but}\n\n`;
+
+      // basit kurallar
+      const fiyatlar = {
+        dusuk: {otel:40,airbnb:35,kamp:0, araba:60, tren:40, ucak:150},
+        orta: {otel:70,airbnb:60,kamp:0, araba:80, tren:60, ucak:220},
+        yuksek: {otel:120,airbnb:100,kamp:0, araba:120, tren:100, ucak:350}
+      };
+      const konfiyat = fiyatlar[but][kon];
+      const ulfiyat  = fiyatlar[but][ul];
+      const gunlukYemek = {dusuk:20, orta:35, yuksek:60}[but];
+
+      const toplam = (ex+5)*(konfiyat + gunlukYemek) + ulfiyat + 120; // 120 € festival bileti
+
+      cikti += `Tahmini toplam: ≈ ${Math.round(toplam)} €\n\n`;
+
+      // rota önerisi
+      cikti += "--- Önerilen rota ---\n";
+      if(ex>0){
+        cikti += `1-${ex} Ağu: Prag keşfi (araba yoksa tren+tramvay)\n`;
+      }
+      cikti += `${ex+1} Ağu: Prag → Jaroměř, öğleden sonra kale turu\n`;
+      cikti += `${ex+2} Ağu: Adršpach kayaları doğa günü\n`;
+      cikti += `${ex+3} Ağu: Kutná Hora kemik kilisesi\n`;
+      cikti += `${ex+4} Ağu: Festival 1. gün\n`;
+      cikti += `${ex+5} Ağu: Festival 2. gün\n`;
+      cikti += `${ex+6} Ağu: Festival 3. gün + gece konserleri\n`;
+      cikti += `${ex+7} Ağu: Check-out & dönüş\n`;
+
+      document.getElementById('sonuc').textContent = cikti;
+    }
+  </script>
+</body>
+</html>
