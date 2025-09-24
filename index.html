@@ -89,4 +89,32 @@
     }
   </script>
 </body>
+
 </html>
+
+<!doctype html><html lang="tr"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brutal 26</title>
+<meta name="theme-color" content="#ff4d4d">
+<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Brutal 26&quot;,&quot;short_name&quot;:&quot;Brutal26&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#111&quot;,&quot;theme_color&quot;:&quot;#ff4d4d&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'&gt;&lt;rect width='128' height='128' fill='%23ff4d4d' rx='16'/&gt;&lt;text x='50%' y='50%' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle'&gt;BA&lt;/text&gt;&lt;/svg&gt;&quot;,&quot;sizes&quot;:&quot;128x128&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
+<style>body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:1rem;background:#111;color:#eee}h1{color:#ff4d4d}label{display:block;margin:.6rem 0 .2rem}input,select{width:100%;padding:.4rem;border:none;border-radius:4px}button{background:#ff4d4d;color:#fff;border:none;padding:.6rem 1rem;border-radius:4px;cursor:pointer;margin-top:1rem}button:hover{background:#ff1a1a}#sonuc{background:#222;padding:1rem;border-radius:6px;margin-top:1rem;white-space:pre-wrap}</style>
+</head>
+<body>
+<h1>Brutal 26</h1>
+<label>Ekstra gün (Prag vs)</label><input type="number" id="ex" min="0" max="5" value="2">
+<label>Konaklama</label><select id="kon"><option value="otel">Otel</option><option value="airbnb">Airbnb</option><option value="kamp">Kamp</option></select>
+<label>Ulaşım</label><select id="ul"><option value="araba">Araba</option><option value="tren">Tren</option><option value="ucak">Uçak</option></select>
+<label>Bütçe</label><select id="but"><option value="dusuk">Düşük</option><option value="orta">Orta</option><option value="yuksek">Yüksek</option></select>
+<button onclick="plan()">Planla</button>
+<div id="sonuc"></div>
+<script>
+function plan(){
+  const ex=Number(ex.value),kon=kon.value,ul=ul.value,but=but.value,
+        f={dusuk:{otel:40,airbnb:35,kamp:0,araba:60,tren:40,ucak:150},orta:{otel:70,airbnb:60,kamp:0,araba:80,tren:60,ucak:220},yuksek:{otel:120,airbnb:100,kamp:0,araba:120,tren:100,ucak:350}},
+        y={dusuk:20,orta:35,yuksek:60},
+        top=(ex+5)*(f[but][kon]+y[but])+f[but][ul]+120;
+  sonuc.textContent=`≈ ${Math.round(top)} €\n\n${ex} gün Prag → 5 gün Jaroměř\nKonaklama: ${kon}\nUlaşım: ${ul}\nBütçe: ${but}`;
+}
+</script>
+</body></html>
